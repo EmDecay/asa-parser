@@ -1,5 +1,5 @@
 # asa-parser
-Cisco ASA log parser - makes searching ASA syslog messages easier.
+Cisco ASA log parser - makes searching ASA syslog messages easier.  Currently only searches for ACL deny messages, and only TCP and UDP (not ICMP or other packet types).  More support will be added time permitting.
 
 ## Usage
 ```
