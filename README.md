@@ -3,13 +3,14 @@ Cisco ASA log parser - makes searching ASA syslog messages easier.  Currently on
 
 ## Usage
 ```
-usage: asa-parser.py [-h] [--sourceinterface SOURCEINTERFACE]
+usage: asa-parser.py [-h] [--file FILE] [--sourceinterface SOURCEINTERFACE]
                      [--sourceip SOURCEIP] [--sourceport SOURCEPORT]
                      [--destinterface DESTINTERFACE] [--destip DESTIP]
                      [--destport DESTPORT] [--proto PROTO] [--policy POLICY]
 
 optional arguments:
   -h, --help            show this help message and exit
+  --file FILE           Log File to Search (default: messages)
   --sourceinterface SOURCEINTERFACE
                         Source Interface (default: any)
   --sourceip SOURCEIP   Source IP (default: any)
