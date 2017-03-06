@@ -5,6 +5,7 @@
 import re, csv, argparse
 
 _args = argparse.ArgumentParser()
+_args.add_argument("--file", default="messages", required=False, help="Log File to Search (default: %(default)s)")
 _args.add_argument("--sourceinterface", default="any", required=False, help="Source Interface (default: %(default)s)")
 _args.add_argument("--sourceip", default="any", required=False, help="Source IP (default: %(default)s)")
 _args.add_argument("--sourceport", default="any", required=False, help="Source Port (default: %(default)s)")
@@ -20,7 +21,7 @@ p = re.compile('(.*\d\d\:\d\d\:\d\d).*Deny (tcp|udp) src (.*?):(\d{1,3}\.\d{1,3}
 with open("results.csv", 'wb') as outfile:
     csv_writer = csv.writer(outfile)
     csv_writer.writerow(["Date", "Source Interface", "Source IP", "Source Port", "Destination Interface", "Destination IP", "Destination Port", "Protocol", "Firewall Policy"])
-    with open("messages", 'r') as file:
+    with open(args.file, 'r') as file:
       for line in file:
         try:
           results = p.search(line)
