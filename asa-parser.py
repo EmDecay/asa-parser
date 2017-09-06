@@ -14,9 +14,16 @@ _args.add_argument("--destip", default="any", required=False, help="Destination 
 _args.add_argument("--destport", default="any", required=False, help="Destination Port (default: %(default)s)")
 _args.add_argument("--proto", default="any", required=False, help="Protocol [tcp|udp] (default: %(default)s)")
 _args.add_argument("--policy", default="any", required=False, help="Firewall Policy (default: %(default)s)")
+_args.add_argument("--action", default="deny", required=False, help="Action [deny|allow] (default: %(default)s)")
 args = _args.parse_args()
 
-p = re.compile('(.*\d\d\:\d\d\:\d\d).*Deny (tcp|udp) src (.*?):(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/(\d{1,5}) dst (.*?):(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/(\d{1,5}) by access-group \"(.*?)\"')
+if (args.action == "deny"):
+    p = re.compile('(.*\d\d\:\d\d\:\d\d).*Deny (tcp|udp) src (.*?):(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/(\d{1,5}) dst (.*?):(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/(\d{1,5}) by access-group \"(.*?)\"')
+elif (args.action == "allow"):
+    p = re.compile('(.*\d\d\:\d\d\:\d\d).*Built (inbound|outbound) (UDP|TCP) connection.*for (.*?):(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/(\d{1,5}).*to (.*?):(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/(\d{1,5}).*')
+else:
+    print 'Invalid action specified: ' + args.action
+    quit()
 
 with open("results.csv", 'wb') as outfile:
     csv_writer = csv.writer(outfile)
