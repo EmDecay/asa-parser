@@ -31,16 +31,29 @@ with open("results.csv", 'wb') as outfile:
     with open(args.file, 'r') as file:
       for line in file:
         try:
-          results = p.search(line)
-          date = results.group(1).strip()
-          proto = results.group(2).strip()
-          sourceinterface = results.group(3).strip()
-          sourceip = results.group(4).strip()
-          sourceport = results.group(5).strip()
-          destinterface = results.group(6).strip()
-          destip = results.group(7).strip()
-          destport = results.group(8).strip()
-          policy = results.group(9).strip()
+            if (args.action == "deny"):
+                results = p.search(line)
+                date = results.group(1).strip()
+                proto = results.group(2).strip()
+                sourceinterface = results.group(3).strip()
+                sourceip = results.group(4).strip()
+                sourceport = results.group(5).strip()
+                destinterface = results.group(6).strip()
+                destip = results.group(7).strip()
+                destport = results.group(8).strip()
+                policy = results.group(9).strip()
+            elif (args.action == "allow"):
+                results = p.search(line)
+                date = results.group(1).strip()
+                direction = results.group(2).strip()
+                proto = results.group(3).strip()
+                sourceinterface = results.group(4).strip()
+                sourceip = results.group(5).strip()
+                sourceport = results.group(6).strip()
+                destinterface = results.group(7).strip()
+                destip = results.group(8).strip()
+                destport = results.group(9).strip()
+                policy = ""
         except:
           continue
         match = True
