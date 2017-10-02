@@ -47,12 +47,20 @@ with open("results.csv", 'wb') as outfile:
                 date = results.group(1).strip()
                 direction = results.group(2).strip()
                 proto = results.group(3).strip()
-                sourceinterface = results.group(4).strip()
-                sourceip = results.group(5).strip()
-                sourceport = results.group(6).strip()
-                destinterface = results.group(7).strip()
-                destip = results.group(8).strip()
-                destport = results.group(9).strip()
+                if direction == "inbound":
+                    sourceinterface = results.group(4).strip()
+                    sourceip = results.group(5).strip()
+                    sourceport = results.group(6).strip()
+                    destinterface = results.group(7).strip()
+                    destip = results.group(8).strip()
+                    destport = results.group(9).strip()
+                else:
+                    destinterface = results.group(4).strip()
+                    destip = results.group(5).strip()
+                    destport = results.group(6).strip()
+                    sourceinterface = results.group(7).strip()
+                    sourceip = results.group(8).strip()
+                    sourceport = results.group(9).strip()
                 policy = ""
         except:
           continue
